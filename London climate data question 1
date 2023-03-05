@@ -1,0 +1,31 @@
+import pandas as pd
+import datetime
+import matplotlib.pyplot as plt
+%matplotlib inline
+df = pd.read_csv('london_weather.csv')
+df
+df['date'] = pd.to_datetime(df['date'], format='%Y%m%d')
+print(df)
+print(df.dtypes)
+df.set_index('date', inplace=True)
+df.index = pd.to_datetime(df.index)
+df.resample('1m').mean()
+df_20 = pd.DataFrame(df_20)
+def line_chart(date, min_temp, max_temp):
+    """
+    This function creates a line plot using the given Min and
+    max temperatures (celsius) in London for year 2020
+    """
+fig, ax = plt.subplots(figsize=(20, 15))
+
+ax.plot(date, min_temp, label='Min')
+ax.plot(date, max_temp, label='Max')
+ax.grid(color='grey', linestyle='--', linewidth=0.001, alpha=0.3)
+plt.xlabel('Month')
+plt.ylabel('Temperature')
+plt.title('Min and max temperatures (celsius) in London for year 2020')
+ax.legend()
+date = df_20.index
+min_temp = df_20['min_temp']
+max_temp = df_20['max_temp']
+line_chart(date, min_temp, max_temp)
